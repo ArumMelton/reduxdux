@@ -11,11 +11,15 @@ import {
   TOGGLE_CART,
 } from "./actions";
 
-// TODO: Create the intial state
-const initialState = {};
+const initialState = {
+  products: [],
+  categories: [],
+  currentCategory: "",
+  cart: [],
+  cartOpen: false,
+};
 
-// TODO: Modify the reducer function to take in the initial state
-export const reducer = (state, action) => {
+export const reducers = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PRODUCTS:
       return {
@@ -88,7 +92,5 @@ export const reducer = (state, action) => {
       return state;
   }
 };
-// TODO: Change the export to only the reducer to be used in store.js
-export function useProductReducer(initialState) {
-  return useReducer(reducer, initialState);
-}
+
+export default reducers;
