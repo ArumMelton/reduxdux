@@ -8,15 +8,15 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+import { Provider } from "react-redux";
+import store from "./utils/store";
+
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
-// TODO: Our Provider comes from Redux now.
-import { StoreProvider } from "./utils/GlobalState";
-// TODO: import the store from store.js
 import Success from "./pages/Success";
 import OrderHistory from "./pages/OrderHistory";
 
@@ -39,13 +39,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// TODO: Change the StoreProvider to use our Redux Provider amd set the store
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider>
+          <Provider store={store}>
             <Nav />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -56,7 +55,7 @@ function App() {
               <Route path="/products/:id" element={<Detail />} />
               <Route path="*" element={<NoMatch />} />
             </Routes>
-          </StoreProvider>
+          </Provider>
         </div>
       </Router>
     </ApolloProvider>
